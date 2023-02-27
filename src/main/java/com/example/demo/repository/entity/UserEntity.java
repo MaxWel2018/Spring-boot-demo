@@ -1,14 +1,17 @@
 package com.example.demo.repository.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @Builder
 public class UserEntity {
-    private final String name;
-    private final String lastname;
-    private final AddressEntity addressEntity;
-
+    private String id;
+    private String name;
+    private String lastname;
+    private AddressEntity addressEntity;
 
 }
+

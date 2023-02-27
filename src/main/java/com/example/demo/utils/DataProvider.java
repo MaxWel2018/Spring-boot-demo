@@ -21,6 +21,7 @@ public class DataProvider {
         Faker faker = new Faker();
 
         return UserEntity.builder()
+                .id(faker.idNumber().valid())
                 .name(faker.name().firstName())
                 .lastname(faker.name().lastName())
                 .addressEntity(getAddressEntity(faker))

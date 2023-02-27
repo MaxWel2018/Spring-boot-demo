@@ -1,13 +1,14 @@
 package com.example.demo.repository.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@ToString
+@EqualsAndHashCode
 @Builder
 public class AddressEntity {
-    private final String id;
-    private final String streetName;
-    private final String buildNumber;
+    private String id;
+    private String streetName;
+    private String buildNumber;
 
 }
