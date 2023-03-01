@@ -3,8 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.service.UserService;
 import com.example.demo.service.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/home")
@@ -37,24 +38,38 @@ public class UserController {
         return userService.findById(id);
     }
 
+    @GetMapping("/find/all")
+    public List<User> findAll(){
+        return userService.findAll();
+    }
+
+    @GetMapping("/find/{name}")
+    public User findUserByName(@PathVariable String name){
+        return userService.findByName(name);
+    }
+
+
     /*POST request http://localhost:8080/home
      *
      * read about RequestBody https://www.baeldung.com/spring-request-response-body
      * */
     @PostMapping
-    public User saveUser(@RequestBody User user) {
-        return user;
-
+    public List<User> saveUser(@RequestBody User user) {
+        return userService.save(user);
     }
 
     /*PUT request http://localhost:8080/home/123*/
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public User updateUser(@PathVariable String id, @RequestBody User user) {
-        throw new UnsupportedOperationException();
+       try {
+           return userService.updateUser(id, user);
+       }catch (IndexOutOfBoundsException e){
+           throw new IllegalArgumentException("Not valid index value");
+       }
     }
 
-    @DeleteMapping("{idForDelete}")
+    @DeleteMapping("/delete/{idForDelete}")
     public void deleteUser(@PathVariable(name = "idForDelete") String id) {
-        throw new UnsupportedOperationException();
+        userService.deleteById(id);
     }
 }

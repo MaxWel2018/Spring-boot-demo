@@ -7,9 +7,10 @@ import com.example.demo.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
     //    private UserRepository userRepository = ApplicationContext.getBean("userRepository");
     private final UserMapper userMapper;
@@ -24,5 +25,39 @@ public class UserServiceImpl implements UserService {
     public User findById(String id) {
         UserEntity user = userRepository.findById(id);
         return userMapper.mapEntityToDto(user);
+    }
+
+    @Override
+    public List<User> save(User user) {
+        UserEntity userEntity = userMapper.mapDtoToEntity(user);
+        return userRepository.save(userEntity)
+                .stream()
+                .map(userMapper::mapEntityToDto)
+                .toList();
+    }
+
+    @Override
+    public User updateUser(String id, User user) {
+        UserEntity userEntity = userMapper.mapDtoToEntity(user);
+        UserEntity updatedUser = userRepository.updateUser(id, userEntity);
+        return userMapper.mapEntityToDto(updatedUser);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll().stream()
+                .map(userMapper::mapEntityToDto)
+                .toList();
+    }
+
+    @Override
+    public void deleteById(String id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public User findByName(String name) {
+        UserEntity userEntity = userRepository.findByName(name);
+        return userMapper.mapEntityToDto(userEntity);
     }
 }
