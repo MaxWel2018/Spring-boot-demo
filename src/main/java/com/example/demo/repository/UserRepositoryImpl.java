@@ -14,7 +14,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<UserEntity> save(UserEntity userEntity) {
+    public UserEntity save(UserEntity userEntity) {
         return DataProvider.saveUser(userEntity);
     }
 

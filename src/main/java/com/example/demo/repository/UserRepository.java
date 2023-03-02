@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserRepository{
     UserEntity findById(String id);
-    List<UserEntity> save(UserEntity userEntity);
+    UserEntity save(UserEntity userEntity);
 
     UserEntity updateUser(String id, UserEntity userEntity);
 

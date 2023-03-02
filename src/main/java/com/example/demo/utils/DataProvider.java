@@ -12,9 +12,9 @@ public class DataProvider {
     private static final List<UserEntity> userEntityList = new ArrayList<>();
     public static final String USER_WITH_NAME_IS_NOT_EXIST = "User with name is not exist";
 
-    public static List<UserEntity> saveUser(UserEntity userEntity) {
+    public static UserEntity saveUser(UserEntity userEntity) {
         userEntityList.add(userEntity);
-        return userEntityList;
+        return userEntity;
     }
 
     public static UserEntity user() {

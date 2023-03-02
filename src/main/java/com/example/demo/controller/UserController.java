@@ -54,7 +54,7 @@ public class UserController {
      * read about RequestBody https://www.baeldung.com/spring-request-response-body
      * */
     @PostMapping
-    public List<User> saveUser(@RequestBody User user) {
+    public User saveUser(@RequestBody User user) {
         return userService.save(user);
     }
 

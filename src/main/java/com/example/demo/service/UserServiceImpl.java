@@ -28,12 +28,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> save(User user) {
+    public User save(User user) {
         UserEntity userEntity = userMapper.mapDtoToEntity(user);
-        return userRepository.save(userEntity)
-                .stream()
-                .map(userMapper::mapEntityToDto)
-                .toList();
+        UserEntity savedUserEntity = userRepository.save(userEntity);
+        return userMapper.mapEntityToDto(savedUserEntity);
     }
 
     @Override
