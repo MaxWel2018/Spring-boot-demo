@@ -37,5 +37,4 @@ public class UserRepositoryImpl implements UserRepository {
     public UserEntity findByName(String name) {
         return DataProvider.findByName(name);
     }
-
 }
