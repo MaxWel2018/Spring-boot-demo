@@ -1,16 +1,29 @@
 package com.example.demo.repository.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.engine.internal.Cascade;
 
+import java.io.Serializable;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @Builder
-public class UserEntity {
+@Table(name="users")
+@Entity
+public class UserEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    @Column
     private String name;
+    @Column
     private String lastname;
+    @OneToOne(cascade=CascadeType.ALL)
     private AddressEntity addressEntity;
 
 }

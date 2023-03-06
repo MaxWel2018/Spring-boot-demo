@@ -4,6 +4,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.entity.UserEntity;
 import com.example.demo.service.dto.User;
 import com.example.demo.service.mapper.UserMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(String id) {
-        UserEntity user = userRepository.findById(id);
-        return userMapper.mapEntityToDto(user);
+        return userRepository.findById(id).map(userMapper::mapEntityToDto).orElseThrow(RuntimeException::new);
     }
 
     @Override
@@ -37,8 +37,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(String id, User user) {
         UserEntity userEntity = userMapper.mapDtoToEntity(user);
-        UserEntity updatedUser = userRepository.updateUser(id, userEntity);
-        return userMapper.mapEntityToDto(updatedUser);
+        if (!userRepository.existsById(id)) {
+            throw new EntityNotFoundException("User with id not found");
+        }
+        UserEntity save = userRepository.save(userEntity);
+        return userMapper.mapEntityToDto(save);
     }
 
     @Override
@@ -58,4 +61,5 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userRepository.findByName(name);
         return userMapper.mapEntityToDto(userEntity);
     }
+
 }
