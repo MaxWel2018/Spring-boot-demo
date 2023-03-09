@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user
+      author: vladnickgo
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: uuid
+                  constraints:
+                    foreignKeyName: id
+                    references: address(id)

@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-address
+      author: vladnickgo
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: streetName
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: buildName
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
