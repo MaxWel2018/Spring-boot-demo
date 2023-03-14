@@ -2,6 +2,7 @@ package com.example.demo.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.engine.internal.Cascade;
 
 import java.io.Serializable;
 
